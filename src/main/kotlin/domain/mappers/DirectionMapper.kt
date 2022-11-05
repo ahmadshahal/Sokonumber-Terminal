@@ -7,5 +7,5 @@ fun String.toDirection() = when(this[0]) {
     'a' -> Direction.LEFT
     'w' -> Direction.UP
     's' -> Direction.DOWN
-    else -> Direction.UP
+    else -> throw Exception("Action isn't supported")
 }

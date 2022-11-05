@@ -52,4 +52,18 @@ enum class GameLevel(
             listOf(CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall),
         ),
     ),
+    Fourth(
+        initBoard = listOf(
+            listOf(CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall),
+            listOf(CellState.Wall, CellState.Number(1), CellState.Wall, CellState.Number(2), CellState.Wall, CellState.Number(3), CellState.Wall),
+            listOf(CellState.Wall, CellState.Empty, CellState.Empty, CellState.Empty, CellState.Empty, CellState.Empty, CellState.Wall),
+            listOf(CellState.Wall, CellState.Wall, CellState.Wall, CellState.Empty, CellState.Wall, CellState.Wall, CellState.Wall),
+        ),
+        finalBoard = listOf(
+            listOf(CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall),
+            listOf(CellState.Wall, CellState.Empty, CellState.Wall, CellState.Empty, CellState.Wall, CellState.Empty, CellState.Wall),
+            listOf(CellState.Wall, CellState.Number(3), CellState.Empty, CellState.Number(2), CellState.Empty, CellState.Number(1), CellState.Wall),
+            listOf(CellState.Wall, CellState.Wall, CellState.Wall, CellState.Empty, CellState.Wall, CellState.Wall, CellState.Wall),
+        ),
+    ),
 }
