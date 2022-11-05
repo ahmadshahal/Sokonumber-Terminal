@@ -1,0 +1,55 @@
+package domain.enums
+
+import domain.state.CellState
+
+enum class GameLevel(
+    val initBoard: List<List<CellState>>,
+    val finalBoard: List<List<CellState>>
+) {
+    FIRST(
+        initBoard = listOf(
+            listOf(CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall),
+            listOf(CellState.Wall, CellState.Number(1), CellState.Empty, CellState.Empty, CellState.Empty, CellState.Empty, CellState.Wall,),
+            listOf(CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall),
+        ),
+        finalBoard = listOf(
+            listOf(CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall),
+            listOf(CellState.Wall, CellState.Empty, CellState.Empty, CellState.Empty, CellState.Empty, CellState.Number(1), CellState.Wall,),
+            listOf(CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall),
+        )
+    ),
+    SECOND(
+        initBoard = listOf(
+            listOf(CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall),
+            listOf(CellState.Wall, CellState.Number(1), CellState.Wall, CellState.Number(2), CellState.Wall),
+            listOf(CellState.Wall, CellState.Empty, CellState.Wall, CellState.Empty, CellState.Wall),
+            listOf(CellState.Wall, CellState.Empty, CellState.Wall, CellState.Empty, CellState.Wall),
+            listOf(CellState.Wall, CellState.Empty, CellState.Wall, CellState.Empty, CellState.Wall),
+            listOf(CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall),
+        ),
+        finalBoard = listOf(
+            listOf(CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall),
+            listOf(CellState.Wall, CellState.Empty, CellState.Wall, CellState.Empty, CellState.Wall),
+            listOf(CellState.Wall, CellState.Empty, CellState.Wall, CellState.Empty, CellState.Wall),
+            listOf(CellState.Wall, CellState.Empty, CellState.Wall, CellState.Empty, CellState.Wall),
+            listOf(CellState.Wall, CellState.Number(1), CellState.Wall, CellState.Number(2), CellState.Wall),
+            listOf(CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall),
+        )
+    ),
+    Third(
+        initBoard = listOf(
+            listOf(CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall),
+            listOf(CellState.Wall, CellState.Number(1), CellState.Empty, CellState.Empty, CellState.Wall),
+            listOf(CellState.Wall, CellState.Wall, CellState.Empty, CellState.Wall, CellState.Wall),
+            listOf(CellState.Wall, CellState.Empty, CellState.Empty, CellState.Number(2), CellState.Wall),
+            listOf(CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall),
+        ),
+        finalBoard = listOf(
+            listOf(CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall),
+            listOf(CellState.Wall, CellState.Empty, CellState.Number(2), CellState.Empty, CellState.Wall),
+            listOf(CellState.Wall, CellState.Wall, CellState.Empty, CellState.Wall, CellState.Wall),
+            listOf(CellState.Wall, CellState.Empty, CellState.Number(1), CellState.Empty, CellState.Wall),
+            listOf(CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall, CellState.Wall),
+        ),
+    ),
+}
