@@ -6,7 +6,7 @@ fun String.toGameStrategy() = when(this[0]) {
     '0' -> GameStrategy.USER
     '1' -> GameStrategy.DFS
     '2' -> GameStrategy.BFS
-    '3' -> GameStrategy.USC
+    '3' -> GameStrategy.UCS
     '4' -> GameStrategy.A_STAR
     else -> throw Exception("Action isn't supported")
 }

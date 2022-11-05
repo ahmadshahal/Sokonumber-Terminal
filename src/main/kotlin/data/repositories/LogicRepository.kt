@@ -29,9 +29,7 @@ class LogicRepository(private val node: Node) {
     /**
      * Hands the control to the computer to play using USC algorithm.
      */
-    fun usc(node: Node) {
-        TODO("Not yet implemented")
-    }
+    fun ucs(node: Node) = logicDataSource.ucs(node = node)
 
     /**
      * Hands the control to the computer to play using AStar algorithm.
