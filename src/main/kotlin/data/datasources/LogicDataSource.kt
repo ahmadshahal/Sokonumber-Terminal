@@ -43,7 +43,7 @@ class LogicDataSource {
      * UCS Algorithm AKA Dijkstra.
      */
     fun ucs(node: Node) {
-        val compareByCost: Comparator<Pair<Int, Node>> = compareByDescending { it.first }
+        val compareByCost: Comparator<Pair<Int, Node>> = compareBy { it.first }
         val costMap = mutableMapOf<Node, Int>()
         val priorityQueue = PriorityQueue(compareByCost)
         priorityQueue.add(Pair(0, node))
