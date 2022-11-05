@@ -17,7 +17,7 @@ fun main() {
     val gameStrategy = readln().toGameStrategy()
 
     println("Choose The Game Level: ")
-    (1..7).toList().forEach { print("$it ") }
+    (1..6).toList().forEach { print("$it ") }
     println()
     val gameLevel = readln().toGameLevel()
 
