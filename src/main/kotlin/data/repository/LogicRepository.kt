@@ -18,8 +18,15 @@ class LogicRepository(private val node: Node) {
     /**
      * Hands the control to the computer to play using DFS algorithm.
      */
-    fun dfs() {
-        TODO("Not yet implemented")
+    fun dfs(node: Node, visited: MutableSet<Node> = mutableSetOf()) {
+        if(node.isFinal()) return
+        visited.add(node)
+        val nextStates = node.getNextStates().filter { !visited.contains(it) }
+        for (state in nextStates) {
+            state.printState()
+            dfs(state, visited)
+        }
+        visited.remove(node)
     }
 
     /**
