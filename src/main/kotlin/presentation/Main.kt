@@ -1,22 +1,43 @@
 package presentation
 
 import data.repository.LogicRepository
+import domain.enums.GameStrategy
+import domain.mappers.toDirection
 import domain.mappers.toGameLevel
+import domain.mappers.toGameStrategy
 import domain.state.Node
 import presentation.utils.printBoard
 
 fun main() {
+
+    println("Choose The Game Strategy")
+    GameStrategy.values().forEach { gameStrategy ->
+        println("${gameStrategy.ordinal}- ${gameStrategy.name} ")
+    }
+    val gameStrategy = readln().toGameStrategy()
+
     println("Choose The Game Level: ")
     (1..7).toList().forEach { print("$it ") }
     println()
     val gameLevel = readln().toGameLevel()
+
     val node = Node(board = gameLevel.initBoard, finalBoard = gameLevel.finalBoard)
     printBoard(gameLevel.finalBoard)
     printBoard(gameLevel.initBoard)
+
     val logicRepository = LogicRepository(node = node)
-    logicRepository.dfs(node)
-//    while (!node.isFinal()) {
-//        val direction = readln().toDirection()
-//        logicRepository.playerMove(direction = direction)
-//    }
+
+    when(gameStrategy) {
+        GameStrategy.USER -> {
+            while (!node.isFinal()) {
+                val direction = readln().toDirection()
+                logicRepository.playerMove(direction = direction)
+                node.printState()
+            }
+        }
+        GameStrategy.DFS -> logicRepository.dfs(node)
+        GameStrategy.BFS -> logicRepository.bfs()
+        GameStrategy.USC -> logicRepository.usc()
+        GameStrategy.A_STAR -> logicRepository.aStar()
+    }
 }
