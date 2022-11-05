@@ -7,5 +7,6 @@ fun String.toGameLevel() = when(this[0]) {
     '2' -> GameLevel.SECOND
     '3' -> GameLevel.Third
     '4' -> GameLevel.Fourth
+    '5' -> GameLevel.FIFTH
     else -> throw Exception("Action isn't supported")
 }
