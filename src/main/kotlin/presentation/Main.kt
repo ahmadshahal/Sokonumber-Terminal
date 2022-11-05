@@ -22,6 +22,7 @@ fun main() {
     val gameLevel = readln().toGameLevel()
 
     val node = Node(board = gameLevel.initBoard, finalBoard = gameLevel.finalBoard)
+    println("Final Board to achieve:")
     printBoard(gameLevel.finalBoard)
     printBoard(gameLevel.initBoard)
 
@@ -35,9 +36,9 @@ fun main() {
                 node.printState()
             }
         }
-        GameStrategy.DFS -> logicRepository.dfs(node)
-        GameStrategy.BFS -> logicRepository.bfs()
-        GameStrategy.USC -> logicRepository.usc()
-        GameStrategy.A_STAR -> logicRepository.aStar()
+        GameStrategy.DFS -> logicRepository.dfs(node = node)
+        GameStrategy.BFS -> logicRepository.bfs(node = node)
+        GameStrategy.USC -> logicRepository.usc(node = node)
+        GameStrategy.A_STAR -> logicRepository.aStar(node = node)
     }
 }
