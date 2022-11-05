@@ -1,20 +1,24 @@
 package domain.state
 
 import domain.enums.Direction
-import domain.enums.GameLevel
 import presentation.utils.printBoard
 
 
 /**
  * A Data class that defines the state in a state space.
- * Takes [GameLevel] as a parameter to define the initial and final boards.
+ * Takes [board] as the current state.
+ * Takes [finalBoard] as the final state.
  */
-data class Node(val gameLevel: GameLevel) {
-
+data class Node(
     /**
      * The Current Node State.
      */
-    private var board: List<List<CellState>> = gameLevel.initBoard
+    private var board: List<List<CellState>>,
+    /**
+     * The Final Node State.
+     */
+    private val finalBoard: List<List<CellState>>
+) {
 
     /**
      * Moves the current state to another state depending on the [direction].
@@ -25,19 +29,18 @@ data class Node(val gameLevel: GameLevel) {
         positionsLoop@ for (position in numberCellsPositions) {
             val nextI = position.first + direction.verticalDelta
             val nextJ = position.second + direction.horizontalDelta
-            if(positionValid(nextI = nextI, nextJ = nextJ)) {
+            if (positionValid(nextI = nextI, nextJ = nextJ)) {
                 newBoard[position.first][position.second] = board[nextI][nextJ]
                 newBoard[nextI][nextJ] = board[position.first][position.second]
             }
         }
         board = newBoard
-        printState()
     }
 
     /**
      * Returns all possible to achieve states.
      */
-    private fun getNextStates(): List<Node> {
+    fun getNextStates(): List<Node> {
         val nextStates = mutableListOf<Node>()
         val possibleDirections = validDirections()
         for (direction in possibleDirections) {
@@ -51,12 +54,12 @@ data class Node(val gameLevel: GameLevel) {
     /**
      * Prints the current state.
      */
-    private fun printState() = printBoard(board = board)
+    fun printState() = printBoard(board = board)
 
     /**
      * Determines if the current stat eis a final state.
      */
-    fun isFinal(): Boolean = gameLevel.finalBoard == board
+    fun isFinal(): Boolean = finalBoard == board
 
     /**
      * A Helper Function that returns all Valid Directions.
@@ -68,7 +71,7 @@ data class Node(val gameLevel: GameLevel) {
             positionsLoop@ for (position in numberCellsPositions) {
                 val nextI = position.first + direction.verticalDelta
                 val nextJ = position.second + direction.horizontalDelta
-                if(positionValid(nextI = nextI, nextJ = nextJ)) {
+                if (positionValid(nextI = nextI, nextJ = nextJ)) {
                     validDirections.add(direction)
                     break@positionsLoop
                 }

@@ -1,7 +1,6 @@
 package presentation
 
 import data.repository.LogicRepository
-import domain.mappers.toDirection
 import domain.mappers.toGameLevel
 import domain.state.Node
 import presentation.utils.printBoard
@@ -11,12 +10,13 @@ fun main() {
     (1..7).toList().forEach { print("$it ") }
     println()
     val gameLevel = readln().toGameLevel()
-    val node = Node(gameLevel = gameLevel)
-    printBoard(gameLevel.initBoard)
+    val node = Node(board = gameLevel.initBoard, finalBoard = gameLevel.finalBoard)
     printBoard(gameLevel.finalBoard)
+    printBoard(gameLevel.initBoard)
     val logicRepository = LogicRepository(node = node)
-    while (!node.isFinal()) {
-        val direction = readln().toDirection()
-        logicRepository.playerMove(direction = direction)
-    }
+    logicRepository.dfs(node)
+//    while (!node.isFinal()) {
+//        val direction = readln().toDirection()
+//        logicRepository.playerMove(direction = direction)
+//    }
 }
