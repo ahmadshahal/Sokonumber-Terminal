@@ -1,34 +1,28 @@
-package data.repository
+package data.datasources
 
-import domain.enums.Direction
 import domain.state.Node
 
 /**
- * Responsible for changing the current game state.
+ * Contains the complex logic and algorithms used in the game.
  */
-class LogicRepository(private val node: Node) {
+class LogicDataSource {
 
     /**
-     * Moves the current state depending on [Direction]
+     * Classic DFS Algorithm.
      */
-    fun playerMove(direction: Direction) = node.move(direction)
-
-    /**
-     * Hands the control to the computer to play using DFS algorithm.
-     */
-    fun dfs(node: Node, visited: MutableSet<Node> = mutableSetOf()) {
-        if(node.isFinal()) return
+    fun dfs(node: Node, visited: MutableSet<Node> = mutableSetOf()): Boolean {
+        if(node.isFinal()) return true
         visited.add(node)
         val nextStates = node.getNextStates().filter { !visited.contains(it) }
         for (state in nextStates) {
             state.printState()
-            dfs(state, visited)
+            if(dfs(state, visited)) return true
         }
-        visited.remove(node)
+        return false
     }
 
     /**
-     * Hands the control to the computer to play using BFS algorithm.
+     * Classic BFS Algorithm.
      */
     fun bfs(node: Node) {
         val queue = mutableListOf(node)
@@ -45,14 +39,14 @@ class LogicRepository(private val node: Node) {
     }
 
     /**
-     * Hands the control to the computer to play using USC algorithm.
+     * UCS Algorithm AKA Dijkstra.
      */
     fun usc(node: Node) {
         TODO("Not yet implemented")
     }
 
     /**
-     * Hands the control to the computer to play using AStar algorithm.
+     * AStar Algorithm.
      */
     fun aStar(node: Node) {
         TODO("Not yet implemented")

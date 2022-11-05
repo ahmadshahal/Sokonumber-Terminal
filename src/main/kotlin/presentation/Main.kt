@@ -1,6 +1,6 @@
 package presentation
 
-import data.repository.LogicRepository
+import data.repositories.LogicRepository
 import domain.enums.GameStrategy
 import domain.mappers.toDirection
 import domain.mappers.toGameLevel
