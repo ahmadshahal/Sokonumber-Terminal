@@ -26,7 +26,7 @@ data class Node(
     fun move(direction: Direction) {
         val newBoard = board.map { it.toMutableList() }.toMutableList()
         val numberCellsPositions = getNumberCellsPositions()
-        positionsLoop@ for (position in numberCellsPositions) {
+        for (position in numberCellsPositions) {
             val nextI = position.first + direction.verticalDelta
             val nextJ = position.second + direction.horizontalDelta
             if (positionValid(nextI = nextI, nextJ = nextJ)) {

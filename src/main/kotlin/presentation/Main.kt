@@ -39,29 +39,17 @@ fun main() {
                 node.printState()
             }
         }
-        GameStrategy.DFS -> {
-            val duration = measureTime {
-                logicRepository.dfs(node = node)
-            }
-            println("DFS execution time: ${duration.inWholeMilliseconds} ms")
-        }
-        GameStrategy.BFS -> {
-            val duration = measureTime {
-                logicRepository.bfs(node = node)
-            }
-            println("BFS execution time: ${duration.inWholeMilliseconds} ms")
-        }
-        GameStrategy.UCS -> {
-            val duration = measureTime {
-                logicRepository.ucs(node = node)
-            }
-            println("UCS execution time: ${duration.inWholeMilliseconds}")
-        }
-        GameStrategy.A_STAR -> {
-            val duration = measureTime {
-                logicRepository.aStar(node = node)
-            }
-            println("A* execution time: ${duration.inWholeMilliseconds}")
+        GameStrategy.DFS -> logicRepository.dfs(node = node)
+        GameStrategy.BFS -> logicRepository.bfs(node = node)
+        GameStrategy.UCS -> logicRepository.ucs(node = node)
+        GameStrategy.A_STAR -> logicRepository.aStar(node = node)
+        GameStrategy.TRY_ALL -> {
+            val dfsDuration = measureTime { logicRepository.dfs(node = node) }
+            val bfsDuration = measureTime { logicRepository.bfs(node = node) }
+            val ucsDuration = measureTime { logicRepository.ucs(node = node) }
+            println("DFS: ${dfsDuration.inWholeMilliseconds} ms")
+            println("BFS: ${bfsDuration.inWholeMilliseconds} ms")
+            println("UCS: ${ucsDuration.inWholeMilliseconds} ms")
         }
     }
 }

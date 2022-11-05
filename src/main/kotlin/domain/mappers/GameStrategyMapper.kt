@@ -8,5 +8,6 @@ fun String.toGameStrategy() = when(this[0]) {
     '2' -> GameStrategy.BFS
     '3' -> GameStrategy.UCS
     '4' -> GameStrategy.A_STAR
+    '5' -> GameStrategy.TRY_ALL
     else -> throw Exception("Action isn't supported")
 }
