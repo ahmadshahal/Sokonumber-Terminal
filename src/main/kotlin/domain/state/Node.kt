@@ -57,9 +57,9 @@ data class Node(
     fun printState() = printBoard(board = board)
 
     /**
-     * Determines if the current stat eis a final state.
+     * Determines if the current stat is a final state.
      */
-    fun isFinal(): Boolean = finalBoard == board
+    fun isFinal() = finalBoard == board
 
     /**
      * A Helper Function that returns all Valid Directions.
