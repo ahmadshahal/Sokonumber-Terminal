@@ -7,7 +7,7 @@ fun printBoard(board: List<List<CellState>>) {
         for (j in board[i].indices) {
             when(val cellState = board[i][j]) {
                 is CellState.Empty -> print(" ")
-                is CellState.Wall -> print("‖")
+                is CellState.Wall -> print("⁕")
                 is CellState.Number -> print(cellState.number)
             }
         }
