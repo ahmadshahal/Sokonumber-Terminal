@@ -20,6 +20,8 @@ data class Node(
     private val finalBoard: List<List<CellState>>
 ) {
 
+    private var parent: Node? = null
+
     /**
      * Moves the current state to another state depending on the [direction].
      */
@@ -45,6 +47,7 @@ data class Node(
         val possibleDirections = validDirections()
         for (direction in possibleDirections) {
             val nextNode = copy()
+            nextNode.parent = this
             nextNode.move(direction)
             nextStates.add(nextNode)
         }
@@ -55,6 +58,21 @@ data class Node(
      * Prints the current state.
      */
     fun printState() = printBoard(board = board)
+
+    /**
+     * Prints the path until this node.
+     */
+    fun printPath() {
+        val path = mutableListOf<Node>()
+        var currentNode = this
+        path.add(currentNode)
+        while (currentNode.parent != null) {
+            currentNode = currentNode.parent!!
+            path.add(currentNode)
+        }
+        path.reverse()
+        path.forEach { it.printState() }
+    }
 
     /**
      * Determines if the current stat is a final state.

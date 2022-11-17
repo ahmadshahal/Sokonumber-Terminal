@@ -12,11 +12,13 @@ class LogicDataSource {
      * Classic DFS Algorithm.
      */
     fun dfs(node: Node, visited: MutableSet<Node> = mutableSetOf()): Boolean {
-        if (node.isFinal()) return true
+        if (node.isFinal()) {
+            node.printPath()
+            return true
+        }
         visited.add(node)
         val nextStates = node.getNextStates().filter { !visited.contains(it) }
         for (state in nextStates) {
-            state.printState()
             if (dfs(state, visited)) return true
         }
         return false
@@ -30,8 +32,10 @@ class LogicDataSource {
         val visited = mutableSetOf<Node>()
         while (queue.isNotEmpty()) {
             val currentNode = queue.first()
-            currentNode.printState()
-            if (currentNode.isFinal()) break
+            if (currentNode.isFinal()) {
+                currentNode.printPath()
+                break
+            }
             visited.add(currentNode)
             val nextStates = currentNode.getNextStates().filter { !visited.contains(it) }
             queue.addAll(nextStates)
