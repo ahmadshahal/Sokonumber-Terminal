@@ -47,16 +47,20 @@ class LogicDataSource {
      * UCS Algorithm AKA Dijkstra.
      */
     fun ucs(node: Node) {
+        var finalNode: Node? = null
         val compareByCost: Comparator<Pair<Int, Node>> = compareBy { it.first }
         val costMap = mutableMapOf<Node, Int>()
         val priorityQueue = PriorityQueue(compareByCost)
         priorityQueue.add(Pair(0, node))
         while (priorityQueue.isNotEmpty()) {
             val (currentCost, currentNode) = priorityQueue.poll()
-            currentNode.printState()
             val possiblePreviousCost = costMap[currentNode] ?: 100_000_000
             if (possiblePreviousCost < currentCost) continue
-            if (currentNode.isFinal()) break
+            if (currentNode.isFinal()) {
+                // Saving the final state and searching for a better solution.
+                // The last saved state will always be the best one.
+                finalNode = currentNode
+            }
             val nextStates = currentNode.getNextStates()
             nextStates.forEach { child ->
                 val possiblePreviousChildCost = costMap[child] ?: 100_000_000
@@ -66,6 +70,10 @@ class LogicDataSource {
                     priorityQueue.add(Pair(childCost, child))
                 }
             }
+        }
+        finalNode?.let {
+            it.printPath()
+            println("Final UCS Cost: ${costMap[it]}")
         }
     }
 
