@@ -39,9 +39,18 @@ fun main() {
                 node.printState()
             }
         }
-        GameStrategy.DFS -> logicRepository.dfs(node = node)
-        GameStrategy.BFS -> logicRepository.bfs(node = node)
-        GameStrategy.UCS -> logicRepository.ucs(node = node)
+        GameStrategy.DFS -> {
+            println("DFS Playing:")
+            logicRepository.dfs(node = node)
+        }
+        GameStrategy.BFS -> {
+            println("BFS Playing:")
+            logicRepository.bfs(node = node)
+        }
+        GameStrategy.UCS -> {
+            println("UCS Playing:")
+            logicRepository.ucs(node = node)
+        }
         GameStrategy.A_STAR -> logicRepository.aStar(node = node)
         GameStrategy.TRY_ALL -> {
             val dfsDuration = measureTime { logicRepository.dfs(node = node) }
