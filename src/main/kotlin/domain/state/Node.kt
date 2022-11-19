@@ -72,6 +72,8 @@ data class Node(
         }
         path.reverse()
         path.forEach { it.printState() }
+        println("Found in Depth: ${path.size}")
+        println("Took ${path.size - 1} Moves")
     }
 
     /**
