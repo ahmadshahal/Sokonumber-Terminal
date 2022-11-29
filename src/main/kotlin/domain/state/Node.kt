@@ -2,6 +2,7 @@ package domain.state
 
 import domain.enums.Direction
 import presentation.utils.printBoard
+import kotlin.math.abs
 
 
 /**
@@ -129,6 +130,27 @@ data class Node(
             if (isNotWall && isNotNumber) return true
         }
         return false
+    }
+
+    fun calculateHeuristic(): Int {
+        val positionInFinalBoardMap = mutableMapOf<CellState, Pair<Int, Int>>()
+        for (i in finalBoard.indices) {
+            for (j in finalBoard[i].indices) {
+                if(finalBoard[i][j] is CellState.Number) {
+                    positionInFinalBoardMap[finalBoard[i][j]] = Pair(i, j)
+                }
+            }
+        }
+        var heuristic = 0
+        for (i in board.indices) {
+            for (j in board[i].indices) {
+                if(board[i][j] is CellState.Number) {
+                    val positionInFinalBoard = positionInFinalBoardMap[board[i][j]] ?: Pair(0, 0)
+                    heuristic += abs(i - positionInFinalBoard.first) + abs(j - positionInFinalBoard.second)
+                }
+            }
+        }
+        return heuristic
     }
 }
 

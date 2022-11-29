@@ -90,6 +90,32 @@ class LogicDataSource {
      * AStar Algorithm.
      */
     fun aStar(node: Node) {
-        TODO("Not yet implemented")
+        val compareByCostAndHeuristic: Comparator<Triple<Int, Int, Node>> = compareBy { it.first + it.second }
+        val scoreMap = mutableMapOf<Node, Int>()
+        val priorityQueue = PriorityQueue(compareByCostAndHeuristic)
+        priorityQueue.add(Triple(0, node.calculateHeuristic(), node))
+        while (priorityQueue.isNotEmpty()) {
+            val (currentCost, currentHeuristic, currentNode) = priorityQueue.poll()
+            val currentScore = currentCost + currentHeuristic
+            val possiblePreviousScore = scoreMap[currentNode] ?: 100_000_000
+            if (possiblePreviousScore < currentScore) continue
+            if (currentNode.isFinal()) {
+                currentNode.printPath()
+                println("Final A* Cost: ${scoreMap[currentNode]}")
+                println("Visited Nodes: ${scoreMap.size}")
+                break
+            }
+            val nextStates = currentNode.getNextStates()
+            nextStates.forEach { child ->
+                val childHeuristic = child.calculateHeuristic()
+                val childCost = currentCost + 1
+                val possiblePreviousChildScore = scoreMap[child] ?: 100_000_000
+                val childScore = childCost + childHeuristic
+                if(childScore < possiblePreviousChildScore) {
+                    scoreMap[child] = childScore
+                    priorityQueue.add(Triple(childCost, childHeuristic, child))
+                }
+            }
+        }
     }
 }

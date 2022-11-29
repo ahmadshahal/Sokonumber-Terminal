@@ -34,7 +34,5 @@ class LogicRepository(private val node: Node) {
     /**
      * Hands the control to the computer to play using AStar algorithm.
      */
-    fun aStar(node: Node) {
-        TODO("Not yet implemented")
-    }
+    fun aStar(node: Node) = logicDataSource.aStar(node = node)
 }

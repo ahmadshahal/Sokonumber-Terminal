@@ -51,7 +51,10 @@ fun main() {
             println("UCS Playing:")
             logicRepository.ucs(node = node)
         }
-        GameStrategy.A_STAR -> logicRepository.aStar(node = node)
+        GameStrategy.A_STAR -> {
+            println("AStar Playing:")
+            logicRepository.aStar(node = node)
+        }
         GameStrategy.TRY_ALL -> {
             val dfsDuration = measureTime { logicRepository.dfs(node = node) }
             val bfsDuration = measureTime { logicRepository.bfs(node = node) }
