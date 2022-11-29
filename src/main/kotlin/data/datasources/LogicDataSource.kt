@@ -8,16 +8,21 @@ import java.util.PriorityQueue
  */
 class LogicDataSource {
 
+    var dfsVisitedNodes = 0
+
     /**
      * Classic DFS Algorithm.
      */
     fun dfs(node: Node, visited: MutableSet<Node> = mutableSetOf()): Boolean {
         if (node.isFinal()) {
             node.printPath()
+            println("Visited Nodes: $dfsVisitedNodes")
+            dfsVisitedNodes = 0
             return true
         }
-        visited.add(node)
+        dfsVisitedNodes++
         val nextStates = node.getNextStates().filter { !visited.contains(it) }
+        nextStates.forEach { visited.add(it) }
         for (state in nextStates) {
             if (dfs(state, visited)) return true
         }
@@ -31,16 +36,19 @@ class LogicDataSource {
         val queue = mutableListOf(node)
         val visited = mutableSetOf<Node>()
         while (queue.isNotEmpty()) {
-            val currentNode = queue.first()
+            val currentNode = queue.removeFirst()
             if (currentNode.isFinal()) {
                 currentNode.printPath()
                 break
             }
-            visited.add(currentNode)
-            val nextStates = currentNode.getNextStates().filter { !visited.contains(it) }
-            queue.addAll(nextStates)
-            queue.removeFirst()
+            currentNode.getNextStates()
+                .filter { !visited.contains(it) }
+                .forEach {
+                    visited.add(it)
+                    queue.add(it)
+                }
         }
+        println("Visited Nodes: ${visited.size}")
     }
 
     /**
@@ -74,6 +82,7 @@ class LogicDataSource {
         finalNode?.let {
             it.printPath()
             println("Final UCS Cost: ${costMap[it]}")
+            println("Visited Nodes: ${costMap.size}")
         }
     }
 
